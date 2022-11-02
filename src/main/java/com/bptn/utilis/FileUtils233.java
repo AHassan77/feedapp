@@ -13,17 +13,24 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class FileUtils3 {
+public class FileUtils233 {
 
-	private static final Logger logger = LoggerFactory.getLogger(FileUtils3.class);
+	private static final Logger logger = LoggerFactory.getLogger(FileUtils233.class);
 
-		
+	static String home = System.getProperty("user.home");
+	
+	static Path p = Paths.get(home + "/test.txt");
+	
 	// System.out.println(home);
 
-	static void isFileExist(Path p) {
-		
+	static void isFileExist() {
+
+		System.out.println(home);
+
+		Path p = Paths.get(home + "/test.txt");
+
 		System.out.println(Files.exists(p));
-		
+
 	}
 
 	static void isFileExistsWithExceptionHandling(Path p) {
@@ -42,17 +49,20 @@ public class FileUtils3 {
 
 	}
 
-	static void createFileIfNotExist(Path p2) throws IOException {
+	static void createFileIfNotExist() throws IOException {
 
-			if (!Files.exists(p2)) {
+		String fileName = "MyFile" + UUID.randomUUID().toString() + ".txt";
+		Path p2 = Paths.get(home + "/" + fileName);
+		if (!Files.exists(p2)) {
 			Files.createFile(p2);
 		}
 
 		System.out.println(Files.exists(p2));
 	}
 
-	static void readFile(Path p) {
-			if (Files.exists(p)) {
+	static void readFile() {
+		Path p = Paths.get(home + "/hello.txt");
+		if (Files.exists(p)) {
 			Scanner scanner;
 			try {
 				scanner = new Scanner(new File(p.toUri()));
@@ -68,24 +78,30 @@ public class FileUtils3 {
 		}
 	}
 
-	static void deleteFile(Path p) throws IOException {
-		
-		System.out.println("Check if a file exists in " + " folder: hello.txt, " + Files.exists(p));
+	static void deleteFile() throws IOException {
+		p = Paths.get(home + "/" + "file.txt");
+
+		if (!Files.exists(p)) {
+			Files.createFile(p);
+		}
+
+		System.out.println("Check if a file exists in " + home + " folder: hello.txt, " + Files.exists(p));
 
 		Files.deleteIfExists(p);
 
-		System.out.println("Check if a file exists in " + " folder: hello.txt, " + Files.exists(p));
+		System.out.println("Check if a file exists in " + home + " folder: hello.txt, " + Files.exists(p));
 
 	}
 	
-	static void writeFile(Path p) throws IOException {
+	static void writeFile() throws IOException {
 		/*
 		 * Path p = Paths.get(home + "writefile.txt"); if(Files.exists(p)){ FileWriter
 		 * writer = new FileWriter(new File(p.toUri()));
 		 * writer.write("Writing some text into this file"); writer.close();
 		 * 
 		 */
-		
+		p = Paths.get(home + "/writefile.txt");
+
 		if (!Files.exists(p)) {
 			Files.createFile(p);
 		}
@@ -100,42 +116,20 @@ public class FileUtils3 {
 		}
 	}
 	
-	static void updateFile(Path p) {
+	static void updateFile() {
 		
-		String p1 = p.toString();
-
-		File file = new File(p1);
-		FileWriter fr;
-		try {
-			fr = new FileWriter(file, true);
-			fr.write("Updated the file\n");
-			logger.debug(" updated successfully!! ");
-			fr.close();
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 	}
-		
 	
 	public static void main(String[] args) throws IOException {
 		
-		String home = System.getProperty("user.home");
 		
-		Path p = Paths.get(home + "/test.txt");
-		
-		deleteFile(p);
-		createFileIfNotExist(p);
-		isFileExist(p);
-		writeFile(p);
+
+		//isFileExist();
 		isFileExistsWithExceptionHandling(p);
-		updateFile(p);
-		readFile(p);
-		
-		
-		
+		//createFileIfNotExist();
+		//readFile();
+		//deleteFile();
+		//writeFile();
 
 	}
 }
