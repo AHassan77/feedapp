@@ -1,4 +1,8 @@
   
+  server:
+    port: 8081
+   #Note default port is 8080 but if you have more than 1 application have to change port numbers if one is already in use
+    
   logging.level:
     web: DEBUG
     '[com.bptn]': DEBUG
