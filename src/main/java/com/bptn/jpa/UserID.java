@@ -1,4 +1,4 @@
-package com.bptn.models;
+package com.bptn.jpa;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +21,7 @@ public class UserID {
 	String emailId;
 	
 	@Column(name = "\"phoneNumber\"")	
-	String phoneNumber;
+	Integer phoneNumber;
 	
 	@Column(name = "\"userPassword\"")
 	String userPassword;
@@ -32,7 +32,7 @@ public class UserID {
 		
 	}
 
-	public UserID(String username, String name, String emailId, String phoneNumber, String userPassword) {
+	public UserID(String username, String name, String emailId, Integer phoneNumber, String userPassword) {
 		super();
 		this.username = username;
 		this.name = name;
@@ -67,11 +67,11 @@ public class UserID {
 		this.emailId = emailId;
 	}
 
-	public String getPhoneNumber() {
+	public Integer getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
+	public void setPhoneNumber(Integer phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 

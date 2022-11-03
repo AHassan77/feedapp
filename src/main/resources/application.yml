@@ -4,6 +4,20 @@
    #Note default port is 8080 but if you have more than 1 application have to change port numbers if one is already in use
     
   logging.level:
-    web: DEBUG
-    '[com.bptn]': DEBUG
+    web: OFF
+   # '[com.bptn]': DEBUG
+    '[org.hibernate]': ERROR
     
+  spring:
+    datasource:
+      url: jdbc:postgresql://localhost:5432/feedApp
+      username: postgres
+      password: pg123
+
+    jpa:
+      show-sql: true
+      hibernate:
+        ddl-auto: validate
+        naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+  

@@ -1,8 +1,14 @@
-package com.bptn.models;
+package com.bptn.jpa;
+
+import java.sql.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="\"History\"")
 public class History {
 	
 	@Id
@@ -10,7 +16,7 @@ public class History {
 	String postID;
 	
 	@Column(name = "date")
-	String date;
+	Date date;
 	
 	@Column(name = "\"postType\"")
 	String postType;
@@ -26,7 +32,7 @@ public class History {
 		
 	}
 
-	public History(String postID, String date, String postType, String postUpload, String usernameKey) {
+	public History(String postID, Date date, String postType, String postUpload, String usernameKey) {
 		super();
 		this.postID = postID;
 		this.date = date;
@@ -43,11 +49,11 @@ public class History {
 		this.postID = postID;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

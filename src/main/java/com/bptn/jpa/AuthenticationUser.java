@@ -1,7 +1,12 @@
-package com.bptn.models;
+package com.bptn.jpa;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="\"AuthenticationUser\"")
 
 public class AuthenticationUser {
 	
@@ -13,7 +18,7 @@ public class AuthenticationUser {
 	String userPassword;
 	
 	@Column(name = "\"phoneNumber\"")
-	String phoneNumber;
+	Integer phoneNumber;
 	
 	@Column(name = "\"securityQuestion1\"")
 	String securityQuestion1;
@@ -38,7 +43,7 @@ public class AuthenticationUser {
 		
 	}
 
-	public AuthenticationUser(String usernameKey, String userPassword, String phoneNumber, String securityQuestion1,
+	public AuthenticationUser(String usernameKey, String userPassword, Integer phoneNumber, String securityQuestion1,
 			String securityQuestion2, String securityQuestion3, String securityAnswer1, String securityAnswer2,
 			String securityAnswer3) {
 		super();
@@ -69,11 +74,11 @@ public class AuthenticationUser {
 		this.userPassword = userPassword;
 	}
 
-	public String getPhoneNumber() {
+	public Integer getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
+	public void setPhoneNumber(Integer phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 

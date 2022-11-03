@@ -1,8 +1,12 @@
-package com.bptn.models;
+package com.bptn.jpa;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="\"Profile\"")
 public class Profile {
 	
 	@Id
@@ -27,7 +31,7 @@ public class Profile {
 	@Column(name = "education")
 	String education;
 	
-	@Column(name = "cerfification" )
+	@Column(name = "certification" )
 	String certification;
 	
 	@Column(name = "skills")

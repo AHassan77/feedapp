@@ -17,7 +17,7 @@ public class FeedController {
 		
 		logger.debug("Ping Executed");
 		
-		String str = "Feed App up and running";
+		String str = "Feed App up and running"; // STR is the MODEL
 		
 		return str;
 	}
