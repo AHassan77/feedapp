@@ -90,7 +90,7 @@ public class FileUtils {
 			Files.createFile(p);
 		}
 
-		try (FileWriter writer = new FileWriter(new File(p.toUri()))) {
+		try (FileWriter writer = new FileWriter(new File(p.toUri()))) { // On 3rd bracket Could put ,true to append data to your file
 
 			for (int i = 0; i < 10; i++) {
 				writer.write("I love Coding\n");
