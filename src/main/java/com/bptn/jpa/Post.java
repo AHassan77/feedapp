@@ -3,21 +3,27 @@ package com.bptn.jpa;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="\"Post\"")
 public class Post {
 	
 	@Id
-	@Column(name = "postID")
+	@Column(name = "\"postID\"")
 	String postID;
 	
-	@Column(name = "postType")
+	@Column(name = "\"postType\"")
 	String postType;
 	
-	@Column(name = "usernameKey")
-	String usernameKey;
+	//@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="\"usernameKey\"") // Foreign key for post Table
+	private UserID userId; // Have an object of user
 
 	public Post() {
 		super();
@@ -28,7 +34,7 @@ public class Post {
 		super();
 		this.postID = postid;
 		this.postType = posttype;
-		this.usernameKey = usernamekey;
+	
 	}
 
 	public String getPostid() {
@@ -38,6 +44,8 @@ public class Post {
 	public void setPostid(String postid) {
 		this.postID = postid;
 	}
+	
+	
 
 	public String getPosttype() {
 		return postType;
@@ -47,17 +55,10 @@ public class Post {
 		this.postType = posttype;
 	}
 
-	public String getUsernamekey() {
-		return usernameKey;
-	}
-
-	public void setUsernamekey(String usernamekey) {
-		this.usernameKey = usernamekey;
-	}
-
+	
 	@Override
 	public String toString() {
-		return "Post [postid=" + postID + ", posttype=" + postType + ", usernamekey=" + usernameKey + "]";
+		return "Post [postid=" + postID + ", posttype=" + postType + ", usernamekey=" + "]";
 	}
 	
 	

@@ -3,7 +3,11 @@ package com.bptn.jpa;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import java.util.List;
+
 
 @Entity
 @Table(name="\"UserID\"") // In postgress use double quotes but in Java have to escape using forward slash
@@ -26,10 +30,19 @@ public class UserID {
 	@Column(name = "\"userPassword\"")
 	String userPassword;
 	
+	// mapping relationship for post using userId
+	
+	@OneToMany(mappedBy="userId") 
+	List<Post> posts;
 	
 	public UserID() {
 		super();
 		
+	}
+	
+	public UserID(String username) {
+		super();
+		this.username = username;
 	}
 
 	public UserID(String username, String name, String emailId, Integer phoneNumber, String userPassword) {
@@ -82,7 +95,14 @@ public class UserID {
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 		
-		
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 
 	@Override
