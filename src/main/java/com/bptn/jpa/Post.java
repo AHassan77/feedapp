@@ -23,7 +23,7 @@ public class Post {
 	//@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="\"usernameKey\"") // Foreign key for post Table
-	private UserID userId; // Have an object of user
+	private UserID userId; // Have an object of user // mapp back to username
 
 	public Post() {
 		super();

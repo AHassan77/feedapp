@@ -32,7 +32,7 @@ public class UserID {
 	
 	// mapping relationship for post using userId
 	
-	@OneToMany(mappedBy="userId") 
+	@OneToMany(mappedBy="userId") // Why did he not use the primary key username?
 	List<Post> posts;
 	
 	public UserID() {
