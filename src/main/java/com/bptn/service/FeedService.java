@@ -51,7 +51,7 @@ public class FeedService {
 	}
 	List<Post> removeEmptyPosts(List<Post> posts){
 		
-		posts.removeIf(p -> p.getPosttype()==null || p.getPosttype().isEmpty() );
+		posts.removeIf(p -> p.getPostType()==null || p.getPostType().isEmpty() );
 		return posts;
 	}
 }

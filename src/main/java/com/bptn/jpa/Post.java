@@ -18,49 +18,62 @@ public class Post {
 	String postID;
 	
 	@Column(name = "\"postType\"")
-	String postType;
+	String postType;	
 	
-	//@JsonIgnore
+	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="\"usernameKey\"") // Foreign key for post Table
-	private UserID userId; // Have an object of user // mapp back to username
+	private UserID userId;
+
 
 	public Post() {
 		super();
 		
 	}
 
-	public Post(String postid, String posttype, String usernamekey) {
+
+	public Post(String postID, String postType, UserID userId) {
 		super();
-		this.postID = postid;
-		this.postType = posttype;
-	
+		this.postID = postID;
+		this.postType = postType;
+		this.userId = userId;
 	}
 
-	public String getPostid() {
+
+	public String getPostID() {
 		return postID;
 	}
 
-	public void setPostid(String postid) {
-		this.postID = postid;
-	}
-	
-	
 
-	public String getPosttype() {
+	public void setPostID(String postID) {
+		this.postID = postID;
+	}
+
+
+	public String getPostType() {
 		return postType;
 	}
 
-	public void setPosttype(String posttype) {
-		this.postType = posttype;
+
+	public void setPostType(String postType) {
+		this.postType = postType;
 	}
 
-	
+
+	public UserID getUserId() {
+		return userId;
+	}
+
+
+	public void setUserId(UserID userId) {
+		this.userId = userId;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Post [postid=" + postID + ", posttype=" + postType + ", usernamekey=" + "]";
-	}
-	
-	
+		return "Post [postID=" + postID + ", postType=" + postType + ", userId=" + userId + "]";
+	} // Have an object of user // mapp back to username
 
 }

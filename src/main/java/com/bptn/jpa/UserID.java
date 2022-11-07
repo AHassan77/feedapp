@@ -17,7 +17,7 @@ public class UserID {
 	@Id
 	@Column(name = "username")	
 	String username;
-	
+		
 	@Column(name = "name")
 	String name;
 	
