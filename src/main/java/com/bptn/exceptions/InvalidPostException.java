@@ -1,5 +1,6 @@
 package com.bptn.exceptions;
 
+@SuppressWarnings("all")
 public class InvalidPostException extends Exception {
 
 	public InvalidPostException() {

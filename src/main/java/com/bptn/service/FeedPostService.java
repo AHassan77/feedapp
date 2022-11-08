@@ -119,13 +119,12 @@ public class FeedPostService {
 				UserID userId = new UserID(request.getUsername() );
 				Post feed = new Post();
 				
-				feed.setPostType(feedResult);
-				
+				feed.setPostType(feedResult);  // Got these from the getters or setters				
 				feed.setUserId(userId);
 				feed.setPostID(this.generatePostId(request));
 				logger.debug("Feed to be stored: {}", feed);
 				
-				return this.feedPostRepository.save(feed);
+				return this.feedPostRepository.save(feed); // save data using save
 			}
 			
 			private String generatePostId(FeedPostRequest request) {

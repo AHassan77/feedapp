@@ -1,5 +1,6 @@
 package com.bptn.exceptions;
 
+@SuppressWarnings("all")
 public class InvalidUserNameException extends Exception {
 
 	public InvalidUserNameException() {
@@ -26,11 +27,6 @@ public class InvalidUserNameException extends Exception {
 	public InvalidUserNameException(Throwable cause) {
 		super(cause);
 		
-	}
-	
-	
-	
-	
-	
+	}	
 
 }

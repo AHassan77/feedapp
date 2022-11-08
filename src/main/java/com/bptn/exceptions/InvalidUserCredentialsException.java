@@ -1,5 +1,6 @@
 package com.bptn.exceptions;
 
+@SuppressWarnings("all")
 public class InvalidUserCredentialsException extends Exception {
 
 	public InvalidUserCredentialsException() {
