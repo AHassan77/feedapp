@@ -3,6 +3,8 @@ package com.bptn.jpa;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,65 +29,66 @@ public class ImageMetaData {
 	
 	@Column(name = "resolution")
 	String resolution;
-	
-	@Column(name = "\"postKey\"")
-	String postKey;
+		
+	@OneToOne
+	@JoinColumn(name="\"postKey\"")
+	private Post post;
 
 	public ImageMetaData() {
 		super();
 		
 	}
 
-	public ImageMetaData(String imageid, String imagename, String imagesize, String imageformat, String imagedate,
-			String resolution, String postKey) {
+	public ImageMetaData(String imageID, String imageName, String imageSize, String imageFormat, String imageDate,
+			String resolution, Post post) {
 		super();
-		this.imageID = imageid;
-		this.imageName = imagename;
-		this.imageSize = imagesize;
-		this.imageFormat = imageformat;
-		this.imageDate = imagedate;
+		this.imageID = imageID;
+		this.imageName = imageName;
+		this.imageSize = imageSize;
+		this.imageFormat = imageFormat;
+		this.imageDate = imageDate;
 		this.resolution = resolution;
-		this.postKey = postKey;
+		this.post = post;
 	}
 
-	public String getImageid() {
+	public String getImageID() {
 		return imageID;
 	}
 
-	public void setImageid(String imageid) {
-		this.imageID = imageid;
+	public void setImageID(String imageID) {
+		this.imageID = imageID;
 	}
 
-	public String getImagename() {
+	public String getImageName() {
 		return imageName;
 	}
 
-	public void setImagename(String imagename) {
-		this.imageName = imagename;
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
 	}
 
-	public String getImagesize() {
+	public String getImageSize() {
 		return imageSize;
 	}
 
-	public void setImagesize(String imagesize) {
-		this.imageSize = imagesize;
+	public void setImageSize(String imageSize) {
+		this.imageSize = imageSize;
 	}
 
-	public String getImageformat() {
+	public String getImageFormat() {
 		return imageFormat;
 	}
 
-	public void setImageformat(String imageformat) {
-		this.imageFormat = imageformat;
+	public void setImageFormat(String imageFormat) {
+		this.imageFormat = imageFormat;
 	}
 
-	public String getImagedate() {
+	public String getImageDate() {
 		return imageDate;
 	}
 
-	public void setImagedate(String imagedate) {
-		this.imageDate = imagedate;
+	public void setImageDate(String imageDate) {
+		this.imageDate = imageDate;
 	}
 
 	public String getResolution() {
@@ -96,22 +99,19 @@ public class ImageMetaData {
 		this.resolution = resolution;
 	}
 
-	public String getPostKey() {
-		return postKey;
+	public Post getPost() {
+		return post;
 	}
 
-	public void setPostKey(String postKey) {
-		this.postKey = postKey;
+	public void setPost(Post post) {
+		this.post = post;
 	}
 
 	@Override
 	public String toString() {
-		return "ImageMetaData [imageid=" + imageID + ", imagename=" + imageName + ", imagesize=" + imageSize
-				+ ", imageformat=" + imageFormat + ", imagedate=" + imageDate + ", resolution=" + resolution
-				+ ", postKey=" + postKey + "]";
+		return "ImageMetaData [imageID=" + imageID + ", imageName=" + imageName + ", imageSize=" + imageSize
+				+ ", imageFormat=" + imageFormat + ", imageDate=" + imageDate + ", resolution=" + resolution + ", post="
+				+ post + "]";
 	}
-	
-	
-	
-
+		
 }

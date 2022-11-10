@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -25,19 +26,28 @@ public class Post {
 	@ManyToOne
 	@JoinColumn(name="\"usernameKey\"") // Foreign key for post Table
 	private UserID userId;
+	
+	@OneToOne(mappedBy="post")
+	private ImageMetaData imageMetaData;
 
 
 	public Post() {
 		super();
 		
 	}
+	
+	
+	public Post(String postID) {
+		super();
+		this.postID = postID;
+	}
 
-
-	public Post(String postID, String postType, UserID userId) {
+	public Post(String postID, String postType, UserID userId, ImageMetaData imageMetaData) {
 		super();
 		this.postID = postID;
 		this.postType = postType;
 		this.userId = userId;
+		this.imageMetaData = imageMetaData;
 	}
 
 
@@ -71,9 +81,20 @@ public class Post {
 	}
 
 
+	public ImageMetaData getImageMetaData() {
+		return imageMetaData;
+	}
+
+
+	public void setImageMetaData(ImageMetaData imageMetaData) {
+		this.imageMetaData = imageMetaData;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Post [postID=" + postID + ", postType=" + postType + ", userId=" + userId + "]";
-	} // Have an object of user // mapp back to username
+		return "Post [postID=" + postID + ", postType=" + postType + ", userId=" + userId + ", imageMetaData="
+				+ imageMetaData + "]";
+	} 	// Have an object of user // mapp back to username
 
 }
