@@ -1,6 +1,8 @@
 package com.bptn.service;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Random;
 
 import org.slf4j.Logger;
@@ -10,8 +12,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.bptn.exceptions.InvalidPostException;
+import com.bptn.exceptions.InvalidUserNameException;
 import com.bptn.jpa.Post;
 import com.bptn.jpa.UserID;
+import com.bptn.repository.FeedHistoryRepository;
 import com.bptn.repository.FeedPostRepository;
 import com.bptn.request.FeedPostRequest;
 
@@ -46,6 +51,7 @@ public class FeedPostService {
 	@Autowired
 	FeedPostRepository feedPostRepository;
 	
+		
 	{ 
 		// "from Date":"2022-10-13",
 		// "toDate": "2022-11-07",
@@ -142,5 +148,6 @@ public class FeedPostService {
 				}
 
 				return postId;
-			}
+			}			
+			
 		}
