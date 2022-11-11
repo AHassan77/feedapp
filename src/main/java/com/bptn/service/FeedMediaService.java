@@ -1,5 +1,6 @@
 package com.bptn.service;
 
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.bptn.jpa.ImageMetaData;
 import com.bptn.jpa.Post;
 import com.bptn.repository.FeedImageMetaDataRepository;
+import com.bptn.request.FeedMediaRequest;
 
 @Service
 public class FeedMediaService {
@@ -40,29 +42,30 @@ public class FeedMediaService {
 		return this.feedImageMetaDataRepository.save(newImage);
 	}
 	
-	public ImageMetaData createNewImage(ImageMetaData imageMetaData, Post post) {
+	public ImageMetaData createNewImage(FeedMediaRequest request) {
 		
 		ImageMetaData newImage = new ImageMetaData();
 		
-		newImage.setImageID(this.generateImageId(post));
-		newImage.setImageName(imageMetaData.getImageName());
-		newImage.setImageFormat(imageMetaData.getImageFormat());
-		newImage.setImageSize(imageMetaData.getImageSize());
-		newImage.setImageDate(imageMetaData.getImageDate());
-		newImage.setResolution(imageMetaData.getResolution());
-		newImage.setPost(post);
+		newImage.setImageID(this.generateFeedMetaDataID(request));
+		newImage.setImageName(request.getImageName());
+		newImage.setImageDate(LocalDate.now().toString());
+		newImage.setImageFormat(request.getImageFormat());
+		newImage.setImageSize(request.getImageSize());
+		newImage.setImageDate(request.getImageDate());
+		newImage.setResolution(request.getImageResolution());
+		newImage.setPost(new Post (request.getPostID()));
 		
 		return this.feedImageMetaDataRepository.save(newImage);
 	}
 	
-	private String generateImageId(Post post) {
+	private String generateFeedMetaDataID(FeedMediaRequest request) {
 		
 		Random random = new Random(System.currentTimeMillis());
 		
 		StringBuilder imageIdBuilder = new StringBuilder();
 		
 		imageIdBuilder.append(random.nextInt());
-		imageIdBuilder.append(Objects.hashCode(post.getPostID()));
+		imageIdBuilder.append(Objects.hashCode(request.getPostID()));
 		
 		String imageId = imageIdBuilder.toString();
 		

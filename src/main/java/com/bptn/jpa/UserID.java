@@ -35,6 +35,9 @@ public class UserID {
 	@OneToMany(mappedBy="userId") // Why did he not use the primary key username?
 	List<Post> posts;
 	
+	@OneToMany(mappedBy = "userId")
+	private List<History> history;
+	
 	public UserID() {
 		super();
 		

@@ -5,7 +5,11 @@ import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="\"History\"")
@@ -24,21 +28,26 @@ public class History {
 	@Column(name = "\"postUpload\"")
 	String postUpload;
 	
-	@Column(name = "\"usernameKey\"")
-	String usernameKey;
+	//@Column(name = "\"usernameKey\"")
+	//String usernameKey;
+	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="\"usernameKey\"") // Foreign key for post Table
+	private UserID userId;
 
 	public History() {
 		super();
 		
 	}
 
-	public History(String postID, Date date, String postType, String postUpload, String usernameKey) {
+	public History(String postID, Date date, String postType, String postUpload, UserID userId) {
 		super();
 		this.postID = postID;
 		this.date = date;
 		this.postType = postType;
 		this.postUpload = postUpload;
-		this.usernameKey = usernameKey;
+		this.userId = userId;
 	}
 
 	public String getPostID() {
@@ -73,18 +82,18 @@ public class History {
 		this.postUpload = postUpload;
 	}
 
-	public String getUsernameKey() {
-		return usernameKey;
+	public UserID getUserId() {
+		return userId;
 	}
 
-	public void setUsernameKey(String usernameKey) {
-		this.usernameKey = usernameKey;
+	public void setUserId(UserID userId) {
+		this.userId = userId;
 	}
 
 	@Override
 	public String toString() {
 		return "History [postID=" + postID + ", date=" + date + ", postType=" + postType + ", postUpload=" + postUpload
-				+ ", usernameKey=" + usernameKey + "]";
-	}
+				+ ", userId=" + userId + "]";
+	}	
 	
 }
