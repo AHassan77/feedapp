@@ -1,118 +1,135 @@
 package com.bptn.jpa;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import java.util.List;
-
+import java.io.Serializable;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import javax.persistence.*;
 
 @Entity
-@Table(name="\"UserID\"") // In postgress use double quotes but in Java have to escape using forward slash
+@Table(name = "\"UserID\"")
+@NamedQuery(name="UserID.findAll", query="SELECT u FROM UserID u")
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
+public class UserID implements Serializable {
 
-public class UserID {
-	
-	@Id
-	@Column(name = "username")	
-	String username;
-		
-	@Column(name = "name")
-	String name;
-	
-	@Column(name = "\"emailID\"") // Since emailID has capital have to escape with double quotes	
-	String emailId;
-	
-	@Column(name = "\"phoneNumber\"")	
-	Integer phoneNumber;
-	
-	@Column(name = "\"userPassword\"")
-	String userPassword;
-	
-	// mapping relationship for post using userId
-	
-	@OneToMany(mappedBy="userId") // Why did he not use the primary key username?
-	List<Post> posts;
-	
-	@OneToMany(mappedBy = "userId")
-	private List<History> history;
-	
-	public UserID() {
-		super();
-		
-	}
-	
-	public UserID(String username) {
-		super();
-		this.username = username;
-	}
+	private static final long serialVersionUID = 1L;
 
-	public UserID(String username, String name, String emailId, Integer phoneNumber, String userPassword) {
+    @Id
+    @Column(name = "username", nullable = false)
+    private String username;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "\"emailID\"", nullable = false)
+    private String emailID;
+
+    @Column(name = "\"phoneNumber\"", nullable = false)
+    private Integer phoneNumber;
+
+    @OneToMany(mappedBy = "usernameKey", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<Role> roles = new LinkedHashSet<>();
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userID")
+    @JsonManagedReference
+    private Profile profile;
+
+    @OneToMany(mappedBy = "usernameKey", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<Address> addresses = new LinkedHashSet<>();
+    
+    
+
+    public UserID() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+    
+    	
+	public UserID(String username, String name, String emailID, Integer phoneNumber, Set<Role> roles, Profile profile,
+			Set<Address> addresses) {
 		super();
 		this.username = username;
 		this.name = name;
-		this.emailId = emailId;
+		this.emailID = emailID;
 		this.phoneNumber = phoneNumber;
-		this.userPassword = userPassword;
-		
-		
+		this.roles = roles;
+		this.profile = profile;
+		this.addresses = addresses;
 	}
 
-	public String getUsername() {
-		return username;
+	public UserID(String username2) {
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+	public Set<Address> getAddresses() {
+        return addresses;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public Profile getProfile() {
+        return profile;
+    }
 
-	public String getEmailId() {
-		return emailId;
-	}
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
 
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
-	}
+    public Set<Role> getRoles() {
+        return roles;
+    }
 
-	public Integer getPhoneNumber() {
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+   
+
+    public Integer getPhoneNumber() {
 		return phoneNumber;
 	}
+
 
 	public void setPhoneNumber(Integer phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public String getUserPassword() {
-		return userPassword;
-	}
 
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
-		
-	}
+	public String getEmailID() {
+        return emailID;
+    }
 
-	public List<Post> getPosts() {
-		return posts;
-	}
+    public void setEmailID(String emailID) {
+        this.emailID = emailID;
+    }
 
-	public void setPosts(List<Post> posts) {
-		this.posts = posts;
-	}
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String id) {
+        this.username = id;
+    }
+
 
 	@Override
 	public String toString() {
-		return "UserID [username=" + username + ", name=" + name + ", emailId=" + emailId + ", phoneNumber="
-				+ phoneNumber + ", userPassword=" + userPassword + "]";
-	}	
-	
-
+		return "UserID [username=" + username + ", name=" + name + ", emailID=" + emailID + ", phoneNumber="
+				+ phoneNumber + ", roles=" + roles + ", profile=" + profile + ", addresses=" + addresses + "]";
+	}
+    
+    
 }

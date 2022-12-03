@@ -21,6 +21,9 @@ public class Post {
 	@Column(name = "\"postType\"")
 	String postType;	
 	
+	@Column(name = "post")
+	String post;
+	
 	
 	@JsonIgnore
 	@ManyToOne
@@ -29,27 +32,33 @@ public class Post {
 	
 	@OneToOne(mappedBy="post")
 	private ImageMetaData imageMetaData;
-
-
+		
 	public Post() {
 		super();
-		
-	}
 	
+	}
+
 	
 	public Post(String postID) {
 		super();
 		this.postID = postID;
 	}
+	
+	
 
-	public Post(String postID, String postType, UserID userId, ImageMetaData imageMetaData) {
+	
+
+	public Post(String postID, String postType, String post, UserID userId, ImageMetaData imageMetaData) {
 		super();
 		this.postID = postID;
 		this.postType = postType;
+		this.post = post;
 		this.userId = userId;
 		this.imageMetaData = imageMetaData;
 	}
 
+
+	
 
 	public String getPostID() {
 		return postID;
@@ -68,6 +77,16 @@ public class Post {
 
 	public void setPostType(String postType) {
 		this.postType = postType;
+	}
+
+
+	public String getPost() {
+		return post;
+	}
+
+
+	public void setPost(String post) {
+		this.post = post;
 	}
 
 
@@ -93,8 +112,10 @@ public class Post {
 
 	@Override
 	public String toString() {
-		return "Post [postID=" + postID + ", postType=" + postType + ", userId=" + userId + ", imageMetaData="
-				+ imageMetaData + "]";
-	} 	// Have an object of user // mapp back to username
+		return "Post [postID=" + postID + ", postType=" + postType + ", post=" + post + ", userId=" + userId
+				+ ", imageMetaData=" + imageMetaData + "]";
+	}
+	
+} 	// Have an object of user // mapp back to username
 
-}
+

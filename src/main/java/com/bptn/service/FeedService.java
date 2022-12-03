@@ -55,3 +55,4 @@ public class FeedService {
 		return posts;
 	}
 }
+

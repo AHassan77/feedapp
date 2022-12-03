@@ -1,79 +1,77 @@
 package com.bptn.jpa;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import java.io.Serializable;
+import javax.persistence.*;
 
 @Entity
-@Table(name="\"Role\"")
+@Table(name = "\"Role\"")
+@NamedQuery(name="Role.findAll", query="SELECT r FROM Role r")
+public class Role implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-public class Role {
-	
-	@Id
-	@Column(name = "\"usernameKey\"")
-	String usernameKey;
-	
-	@Column(name = "\"roleName\"")
-	String roleName;
-	
-	@Column(name = "company")
-	String company;
-	
-	@Column(name = "skills")
-	String skills;
+    @EmbeddedId
+    private RoleId id;
 
-	public Role() {
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "\"usernameKey\"", nullable = false, insertable=false, updatable = false)
+    @JsonBackReference
+    private UserID usernameKey;
+
+    @Column(name = "company", nullable = false)
+    private String company;
+
+    @Column(name = "skills", nullable = false)
+    private String skills;
+    
+    
+
+    public Role() {
 		super();
 		
 	}
+       
 
-	public Role(String usernameKey, String roleName, String company, String skills) {
+	public Role(RoleId id, UserID usernameKey, String company, String skills) {
 		super();
+		this.id = id;
 		this.usernameKey = usernameKey;
-		this.roleName = roleName;
 		this.company = company;
 		this.skills = skills;
 	}
 
-	public String getUsernameKey() {
-		return usernameKey;
-	}
 
-	public void setUsernameKey(String usernameKey) {
-		this.usernameKey = usernameKey;
-	}
-
-	public String getRoleName() {
-		return roleName;
-	}
-
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
-
-	public String getCompany() {
-		return company;
-	}
-
-	public void setCompany(String company) {
-		this.company = company;
-	}
 
 	public String getSkills() {
-		return skills;
-	}
+        return skills;
+    }
 
-	public void setSkills(String skills) {
-		this.skills = skills;
-	}
+    public void setSkills(String skills) {
+        this.skills = skills;
+    }
 
-	@Override
-	public String toString() {
-		return "Role [usernameKey=" + usernameKey + ", roleName=" + roleName + ", company=" + company + ", skills="
-				+ skills + "]";
-	}
-	
-	
+    public String getCompany() {
+        return company;
+    }
 
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public UserID getUsernameKey() {
+        return usernameKey;
+    }
+
+    public void setUsernameKey(UserID usernameKey) {
+        this.usernameKey = usernameKey;
+    }
+
+    public RoleId getId() {
+        return id;
+    }
+
+    public void setId(RoleId id) {
+        this.id = id;
+    }
 }

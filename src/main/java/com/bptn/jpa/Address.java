@@ -1,103 +1,89 @@
 package com.bptn.jpa;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import java.io.Serializable;
+import javax.persistence.*;
 
 @Entity
-@Table(name="\"Address\"")
+@Table(name = "\"Address\"")
+@NamedQuery(name="Address.findAll", query="SELECT a FROM Address a")
+public class Address implements Serializable{
 
-public class Address {
-	
-	@Id
-	@Column(name = "\"usernameKey\"")
-	String usernameKey;
-	
-	@Column(name = "address")
-	String address;
-	
-	@Column(name = "city")
-	String city;
-	
-	@Column(name = "state")
-	String state;
-	
-	@Column(name = "country")
-	String country;
-	
-	@Column(name = "pincode")
-	String pincode;
+    @EmbeddedId
+    private AddressId id;
 
-	public Address() {
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "\"usernameKey\"", nullable = false)
+    @JsonBackReference
+    private UserID usernameKey;
+
+    @Column(name = "city", nullable = false)
+    private String city;
+
+    @Column(name = "state", nullable = false)
+    private String state;
+
+    @Column(name = "country", nullable = false)
+    private String country;
+    
+    
+    public Address() {
 		super();
-		
+		// TODO Auto-generated constructor stub
 	}
+    
+    
 
-	public Address(String username, String address, String city, String state, String country, String pincode) {
+	public Address(AddressId id, UserID usernameKey, String city, String state, String country) {
 		super();
-		this.usernameKey = username;
-		this.address = address;
+		this.id = id;
+		this.usernameKey = usernameKey;
 		this.city = city;
 		this.state = state;
 		this.country = country;
-		this.pincode = pincode;
 	}
 
-	public String getUsername() {
-		return usernameKey;
-	}
 
-	public void setUsername(String username) {
-		this.usernameKey = username;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
 
 	public String getCountry() {
-		return country;
-	}
+        return country;
+    }
 
-	public void setCountry(String country) {
-		this.country = country;
-	}
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
-	public String getPincode() {
-		return pincode;
-	}
+    public String getState() {
+        return state;
+    }
 
-	public void setPincode(String pincode) {
-		this.pincode = pincode;
-	}
+    public void setState(String state) {
+        this.state = state;
+    }
 
-	@Override
-	public String toString() {
-		return "Address [username=" + usernameKey + ", address=" + address + ", city=" + city + ", state=" + state
-				+ ", country=" + country + ", pincode=" + pincode + "]";
-	}
-	
-		
+    public String getCity() {
+        return city;
+    }
 
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public UserID getUsernameKey() {
+        return usernameKey;
+    }
+
+    public void setUsernameKey(UserID usernameKey) {
+        this.usernameKey = usernameKey;
+    }
+
+    public AddressId getId() {
+        return id;
+    }
+
+    public void setId(AddressId id) {
+        this.id = id;
+    }
 }

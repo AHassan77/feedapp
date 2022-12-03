@@ -52,3 +52,4 @@ public class FeedHistoryController {
 		return history;
 	}
 }
+

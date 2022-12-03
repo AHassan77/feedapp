@@ -1,4 +1,4 @@
-package com.bptn.service;
+/* package com.bptn.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,5 +56,8 @@ public class LoginService {
 	}
 }
 // Completed the second part the service. Now need a controller.
+ * 
+ * 
+ */
 
 

@@ -48,4 +48,4 @@ public class FeedController {
 		List<Post> posts = this.feedService.getPostsByPostType(postType);
 		return posts;
 	}
-}
+} 

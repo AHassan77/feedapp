@@ -1,4 +1,4 @@
-/* package com.bptn.controller;
+package com.bptn.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,4 +55,3 @@ public class FeedController123 {
 	}
 
 }
-*/
