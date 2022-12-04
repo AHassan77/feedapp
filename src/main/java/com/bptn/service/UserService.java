@@ -1,78 +1,47 @@
 package com.bptn.service;
 
+import com.bptn.exceptions.InvalidUserNameException;
+import com.bptn.jpa.UserID;
+import com.bptn.repository.UserRepository;
+
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bptn.dao.UserDao;
-import com.bptn.exceptions.InvalidUserNameException;
-import com.bptn.jpa.UserID;
-import com.bptn.repository.UserRepository;
 
 @Service
 public class UserService {
-	
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
-	@Autowired
-	UserDao userDao;
-	
-	@Autowired
-	UserRepository userRepository;
-	
-	public String validateUserId(String username) throws InvalidUserNameException {
-		
-		String message = null;
-		
-		Optional<UserID> option = this.userRepository.findById(username);
-		
-		if (option.isEmpty()) {
-			logger.error("Username={} doesn't exist", username);
-			throw new InvalidUserNameException("Invalid User Name...");
-		} else {
-			logger.debug("Username={} validated", username);
 
-			/*
-			 * if (option.isPresent()) { logger.error("Username={} doesn't exist",
-			 * username); if (option.get().getUsername().equals(username)) { message =
-			 * "username validated"; }else { throw new
-			 * InvalidUserNameException("Invalid User Name..."); } }
-			 */
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
-			return message;
+    @Autowired
+    private UserRepository userRepository;
 
-		}
-	}
-	
-	public List<com.bptn.bean.UserID> listUsers(){
+    public void validateUserId(String username) throws InvalidUserNameException {
+        UserID userID = userRepository.findByUsername(username);
+        if (userID == null) {
+            LOGGER.error("Username={} doesn't exist", username);
+            throw new InvalidUserNameException("Username doesn't exist");
+        } else {
+            LOGGER.debug("Username={} validated", username);
+        }
+    }
 
-		List<com.bptn.bean.UserID> users = userDao.listUsers();
-
-		users.forEach(u -> logger.debug("{}",u));
-
-		return users;
+	public List<com.bptn.bean.UserID> listUsers() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	public com.bptn.bean.UserID findUser(String username){
-		
-		com.bptn.bean.UserID user = userDao.findByUsername(username);
-
-		logger.debug("{}",user);
-		
-		return user;
+	public com.bptn.bean.UserID findUser(String username) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	public void createUser(com.bptn.bean.UserID user){
+	public void createUser(com.bptn.bean.UserID user) {
+		// TODO Auto-generated method stub
 		
-		this.userDao.createUser(user);
-
-		logger.debug("User Created: {}",user);		
 	}
 }
-
-
-

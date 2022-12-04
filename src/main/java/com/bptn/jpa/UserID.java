@@ -40,28 +40,12 @@ public class UserID implements Serializable {
     @OneToMany(mappedBy = "usernameKey", cascade = CascadeType.ALL)
     @JsonManagedReference
     private Set<Address> addresses = new LinkedHashSet<>();
-    
-    
 
-    public UserID() {
-		super();
+    public UserID(String username2) {
 		// TODO Auto-generated constructor stub
 	}
-    
-    	
-	public UserID(String username, String name, String emailID, Integer phoneNumber, Set<Role> roles, Profile profile,
-			Set<Address> addresses) {
-		super();
-		this.username = username;
-		this.name = name;
-		this.emailID = emailID;
-		this.phoneNumber = phoneNumber;
-		this.roles = roles;
-		this.profile = profile;
-		this.addresses = addresses;
-	}
 
-	public UserID(String username2) {
+	public UserID() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -88,19 +72,16 @@ public class UserID implements Serializable {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-   
 
     public Integer getPhoneNumber() {
-		return phoneNumber;
-	}
+        return phoneNumber;
+    }
 
+    public void setPhoneNumber(Integer integer) {
+        this.phoneNumber = integer;
+    }
 
-	public void setPhoneNumber(Integer phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
-
-	public String getEmailID() {
+    public String getEmailID() {
         return emailID;
     }
 
@@ -124,12 +105,10 @@ public class UserID implements Serializable {
         this.username = id;
     }
 
-
 	@Override
 	public String toString() {
 		return "UserID [username=" + username + ", name=" + name + ", emailID=" + emailID + ", phoneNumber="
 				+ phoneNumber + ", roles=" + roles + ", profile=" + profile + ", addresses=" + addresses + "]";
 	}
     
-    
-}
+ }
